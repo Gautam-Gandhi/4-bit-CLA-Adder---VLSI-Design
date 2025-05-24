@@ -1,0 +1,34 @@
+* SPICE3 file created from inv.ext - technology: scmos
+
+.include TSMC_180nm.txt
+.option scale=90n
+
+M1000 out in gnd Gnd CMOSN w=10 l=2
++  ad=50p pd=30u as=50p ps=30u
+M1001 out in vdd vdd CMOSP w=20 l=2
++  ad=100p pd=50u as=100p ps=50u
+C0 out gnd 0.144356f
+C1 in out 0.059344f
+C2 in gnd 0.05684f
+C3 vdd out 0.241686f
+C4 vdd in 0.020694f
+C5 gnd 0 0.129908f
+C6 out 0 0.090511f
+C7 in 0 0.194444f
+C8 vdd 0 1.10802f
+
+Vdd vdd 0 1.8
+V_in in 0 PULSE(0 1.8 20n 0 0 20n 40n)
+
+.tran 0.1n 100n
+.control
+run
+
+plot in out
+meas tran tpdr TRIG V(in) VAL=0.9 RISE=1 TARG V(out) VAL=0.9 FALL=1 $ FROM=25n TO=35n
+meas tran tpdf TRIG V(in) VAL=0.9 FALL=1 TARG V(out) VAL=0.9 RISE=1 $ FROM=45n TO=55n
+let t_delay = 0.5*(tpdr + tpdf)
+print t_delay
+
+.endc
+.end

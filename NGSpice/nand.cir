@@ -1,0 +1,69 @@
+* NMOS, PMOS, CMOS Inverter, and NAND gates
+.include TSMC_180nm.txt
+
+.param LAMBDA = 0.09u
+.param Wp={20*LAMBDA}
+.param Wn={10*LAMBDA}
+.param LENGTH={2*LAMBDA}
+
+* Subcircuit for NMOS transistor
+.subckt NMOS d g s b Width=Wn
+MN d g s b CMOSN W={Width} L={LENGTH}
++ AS={5*Width*LAMBDA} PS={10*LAMBDA+2*Width} AD={2*Width*LAMBDA} PD={10*LAMBDA+2*Width}
+.ends NMOS
+
+* Subcircuit for PMOS transistor
+.subckt PMOS d g s b Width=Wp
+MP d g s b CMOSP W={Width} L={LENGTH}
++ AS={5*Width*LAMBDA} PS={10*LAMBDA+2*Width} AD={2*Width*LAMBDA} PD={10*LAMBDA+2*Width}
+.ends PMOS
+
+* Subcircuit for CMOS Inverter
+.subckt INVERTER in out vdd gnd WidthN=Wn WidthP=Wp
+XMP out in vdd vdd PMOS Width={WidthP}
+XMN out in gnd gnd NMOS Width={WidthN}
+.ends INVERTER
+
+* Subcircuit for a 2-input NAND gate
+.subckt NAND_2input in1 in2 out vdd gnd WidthN=Wn WidthP=Wp
+XP1 out in1 vdd vdd PMOS Width={WidthP}  
+XP2 out in2 vdd vdd PMOS Width={WidthP}  
+XN1 out in1  x  gnd NMOS Width={2*WidthN}
+XN2  x  in2 gnd gnd NMOS Width={2*WidthN}
+.ends NAND_2input
+
+* Subcircuit for a 3-input NAND gate
+.subckt NAND_3input in1 in2 in3 out vdd gnd WidthN=Wn WidthP=Wp
+XP1 out in1 vdd vdd PMOS Width={WidthP}  
+XP2 out in2 vdd vdd PMOS Width={WidthP}  
+XP3 out in3 vdd vdd PMOS Width={WidthP}  
+XN1 out in1  x  gnd NMOS Width={3*WidthN}
+XN2  x  in2  y  gnd NMOS Width={3*WidthN}
+XN3  y  in3 gnd gnd NMOS Width={3*WidthN}
+.ends NAND_3input
+
+* Subcircuit for a 4-input NAND gate
+.subckt NAND_4input in1 in2 in3 in4 out vdd gnd WidthN=Wn WidthP=Wp
+XP1 out in1 vdd vdd PMOS Width={WidthP}  
+XP2 out in2 vdd vdd PMOS Width={WidthP}  
+XP3 out in3 vdd vdd PMOS Width={WidthP}  
+XP4 out in4 vdd vdd PMOS Width={WidthP}  
+XN1 out in1  x  gnd NMOS Width={4*WidthN}
+XN2  x  in2  y  gnd NMOS Width={4*WidthN}
+XN3  y  in3  z  gnd NMOS Width={4*WidthN}
+XN4  z  in4 gnd gnd NMOS Width={4*WidthN}
+.ends NAND_4input
+
+* Subcircuit for a 5-input NAND gate
+.subckt NAND_5input in1 in2 in3 in4 in5 out vdd gnd WidthN=Wn WidthP=Wp
+XP1 out in1 vdd vdd PMOS Width={WidthP}  
+XP2 out in2 vdd vdd PMOS Width={WidthP}  
+XP3 out in3 vdd vdd PMOS Width={WidthP}  
+XP4 out in4 vdd vdd PMOS Width={WidthP}  
+XP5 out in5 vdd vdd PMOS Width={WidthP}  
+XN1 out in1  x  gnd NMOS Width={5*WidthN}
+XN2  x  in2  y  gnd NMOS Width={5*WidthN}
+XN3  y  in3  z  gnd NMOS Width={5*WidthN}
+XN4  z  in4  w  gnd NMOS Width={5*WidthN}
+XN5  w  in5 gnd gnd NMOS Width={5*WidthN}
+.ends NAND_5input

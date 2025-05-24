@@ -1,0 +1,106 @@
+* SPICE3 file created from xor.ext - technology: scmos
+
+.option scale=90n
+
+M1000 out_xor a_21_n168# vdd vdd pfet w=20 l=2
++  ad=100p pd=50u as=100p ps=50u
+M1001 a_n26_n137# in1 gnd Gnd nfet w=10 l=2
++  ad=50p pd=30u as=50p ps=30u
+M1002 a_62_n30# in_ff w_49_n36# w_49_n36# pfet w=40 l=2
++  ad=0.2n pd=50u as=0.2n ps=90u
+M1003 in1 in2 a_n26_n137# vdd pfet w=40 l=2
++  ad=0.2n pd=90u as=0.2n ps=90u
+M1004 a_62_n64# clk a_62_n30# w_49_n36# pfet w=40 l=2
++  ad=0.2n pd=90u as=0.2n ps=50u
+M1005 a_98_n10# clk w_49_n36# w_49_n36# pfet w=20 l=2
++  ad=100p pd=50u as=100p ps=50u
+M1006 out_inv in_inv gnd Gnd nfet w=10 l=2
++  ad=50p pd=30u as=50p ps=30u
+M1007 out_xor a_21_n168# gnd Gnd nfet w=10 l=2
++  ad=50p pd=30u as=50p ps=30u
+M1008 out_inv in_inv vdd vdd pfet w=20 l=2
++  ad=100p pd=50u as=100p ps=50u
+M1009 out_ff a_133_n10# a_51_n72# Gnd nfet w=10 l=2
++  ad=50p pd=30u as=50p ps=30u
+M1010 a_21_n168# a_n26_n137# vdd vdd pfet w=20 l=2
++  ad=100p pd=50u as=100p ps=50u
+M1011 in2 in1 a_n26_n137# vdd pfet w=40 l=2
++  ad=0.2n pd=90u as=0.2n ps=90u
+M1012 a_133_n50# a_98_n10# a_51_n72# Gnd nfet w=20 l=2
++  ad=100p pd=30u as=100p ps=50u
+M1013 a_98_n50# clk a_51_n72# Gnd nfet w=20 l=2
++  ad=100p pd=30u as=100p ps=50u
+M1014 a_98_n10# a_62_n64# a_98_n50# Gnd nfet w=20 l=2
++  ad=100p pd=50u as=100p ps=30u
+M1015 a_62_n64# in_ff a_51_n72# Gnd nfet w=10 l=2
++  ad=50p pd=30u as=50p ps=30u
+M1016 a_133_n10# a_98_n10# w_49_n36# w_49_n36# pfet w=20 l=2
++  ad=100p pd=50u as=100p ps=50u
+M1017 a_133_n10# clk a_133_n50# Gnd nfet w=20 l=2
++  ad=100p pd=50u as=100p ps=30u
+M1018 out_ff a_133_n10# w_49_n36# w_49_n36# pfet w=20 l=2
++  ad=100p pd=50u as=100p ps=50u
+M1019 a_21_n168# a_n26_n137# gnd Gnd nfet w=10 l=2
++  ad=50p pd=30u as=50p ps=30u
+C0 clk a_98_n10# 0.33274f
+C1 a_21_n168# out_xor 0.059344f
+C2 a_n26_n137# gnd 0.180335f
+C3 vdd in2 0.02552f
+C4 a_133_n10# a_51_n72# 0.304049f
+C5 clk a_133_n50# 1.7e-19
+C6 a_98_n10# a_62_n64# 0.163856f
+C7 clk a_133_n10# 0.163856f
+C8 a_21_n168# gnd 0.262811f
+C9 vdd a_n26_n137# 0.317981f
+C10 out_inv gnd 0.123737f
+C11 in_inv out_inv 0.059344f
+C12 a_98_n10# a_133_n10# 0.044023f
+C13 out_xor gnd 0.103118f
+C14 vdd a_21_n168# 0.467651f
+C15 vdd out_inv 0.22794f
+C16 vdd out_xor 0.214182f
+C17 in_inv gnd 0.056598f
+C18 in1 in2 0.424419f
+C19 w_49_n36# out_ff 0.22794f
+C20 vdd in_inv 0.020614f
+C21 w_49_n36# in_ff 0.020473f
+C22 in1 a_n26_n137# 1.51355f
+C23 w_49_n36# clk 0.069031f
+C24 in2 a_n26_n137# 0.90085f
+C25 out_ff a_51_n72# 0.123737f
+C26 w_49_n36# a_62_n64# 0.020872f
+C27 w_49_n36# a_98_n10# 0.272577f
+C28 in_ff a_51_n72# 0.056598f
+C29 w_49_n36# a_133_n10# 0.248779f
+C30 in_ff clk 0.125563f
+C31 in1 gnd 0.056598f
+C32 a_n26_n137# a_21_n168# 0.059344f
+C33 clk a_51_n72# 0.059299f
+C34 a_51_n72# a_98_n50# 1.36e-19
+C35 in_ff a_62_n64# 0.057163f
+C36 a_62_n64# a_51_n72# 0.260028f
+C37 w_49_n36# a_62_n30# 6.79e-20
+C38 a_98_n10# a_51_n72# 0.042875f
+C39 clk a_98_n50# 5.16e-20
+C40 a_133_n10# out_ff 0.059344f
+C41 vdd in1 0.024924f
+C42 a_51_n72# a_133_n50# 1.36e-19
+C43 clk a_62_n64# 0.341152f
+C44 a_62_n64# a_98_n50# 1.7e-19
+C45 gnd 0 0.357774f **FLOATING
+C46 out_xor 0 0.098366f **FLOATING
+C47 a_21_n168# 0 0.225278f **FLOATING
+C48 a_n26_n137# 0 0.441247f **FLOATING
+C49 in2 0 0.170441f **FLOATING
+C50 in1 0 0.266338f **FLOATING
+C51 a_51_n72# 0 0.542627f **FLOATING
+C52 out_ff 0 0.094438f **FLOATING
+C53 a_62_n64# 0 0.323967f **FLOATING
+C54 out_inv 0 0.094438f **FLOATING
+C55 in_inv 0 0.194444f **FLOATING
+C56 a_133_n10# 0 0.299294f **FLOATING
+C57 a_98_n10# 0 0.33934f **FLOATING
+C58 clk 0 1.56137f **FLOATING
+C59 in_ff 0 0.222447f **FLOATING
+C60 vdd 0 5.02535f **FLOATING
+C61 w_49_n36# 0 5.96533f **FLOATING

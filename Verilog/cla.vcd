@@ -1,0 +1,103 @@
+$date
+	Wed Nov 20 14:49:21 2024
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module tb_cla $end
+$var wire 4 ! sum [3:0] $end
+$var wire 1 " cout $end
+$var reg 4 # a [3:0] $end
+$var reg 4 $ b [3:0] $end
+$var reg 1 % cin $end
+$scope module uut $end
+$var wire 4 & a [3:0] $end
+$var wire 4 ' b [3:0] $end
+$var wire 1 % cin $end
+$var wire 1 " cout $end
+$var wire 4 ( sum [3:0] $end
+$var wire 4 ) p [3:0] $end
+$var wire 4 * g_inv [3:0] $end
+$var wire 4 + g [3:0] $end
+$var wire 4 , c [3:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+b0 ,
+b0 +
+b1111 *
+b0 )
+b0 (
+b0 '
+b0 &
+0%
+b0 $
+b0 #
+0"
+b0 !
+$end
+#10
+b10 !
+b10 (
+b10 ,
+b1 +
+b1110 *
+b1 $
+b1 '
+b1 #
+b1 &
+#20
+b100 ,
+b10 +
+b101 !
+b101 (
+b1101 *
+b1 )
+b11 $
+b11 '
+b10 #
+b10 &
+#30
+b100 +
+b1011 *
+b1010 !
+b1010 (
+b1011 ,
+1%
+b101 $
+b101 '
+b100 #
+b100 &
+#40
+b111 +
+b1000 *
+b1110 !
+b1110 (
+b0 )
+b1110 ,
+0%
+b111 $
+b111 '
+b111 #
+b111 &
+#50
+1"
+b1111 +
+b0 *
+b1111 !
+b1111 (
+b1111 ,
+1%
+b1111 $
+b1111 '
+b1111 #
+b1111 &
+#60

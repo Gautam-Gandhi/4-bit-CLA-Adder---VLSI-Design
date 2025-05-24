@@ -1,0 +1,79 @@
+* SPICE3 file created from flipflop.ext - technology: scmos
+
+.include TSMC_180nm.txt
+.option scale=90n
+
+M1000 a_62_n30# in vdd vdd CMOSP w=40 l=2
++  ad=0.2n pd=50u as=0.2n ps=90u
+M1001 a_62_n64# clk a_62_n30# vdd CMOSP w=40 l=2
++  ad=0.2n pd=90u as=0.2n ps=50u
+M1002 a_98_n10# clk vdd vdd CMOSP w=20 l=2
++  ad=100p pd=50u as=100p ps=50u
+M1003 out a_133_n10# gnd Gnd CMOSN w=10 l=2
++  ad=50p pd=30u as=50p ps=30u
+M1004 a_133_n50# a_98_n10# gnd Gnd CMOSN w=20 l=2
++  ad=100p pd=30u as=100p ps=50u
+M1005 a_98_n50# clk gnd Gnd CMOSN w=20 l=2
++  ad=100p pd=30u as=100p ps=50u
+M1006 a_98_n10# a_62_n64# a_98_n50# Gnd CMOSN w=20 l=2
++  ad=100p pd=50u as=100p ps=30u
+M1007 a_62_n64# in gnd Gnd CMOSN w=10 l=2
++  ad=50p pd=30u as=50p ps=30u
+M1008 a_133_n10# a_98_n10# vdd vdd CMOSP w=20 l=2
++  ad=100p pd=50u as=100p ps=50u
+M1009 a_133_n10# clk a_133_n50# Gnd CMOSN w=20 l=2
++  ad=100p pd=50u as=100p ps=30u
+M1010 out a_133_n10# vdd vdd CMOSP w=20 l=2
++  ad=100p pd=50u as=100p ps=50u
+C0 gnd clk 0.059299f
+C1 gnd in 0.056598f
+C2 out a_133_n10# 0.059344f
+C3 gnd a_98_n10# 0.042875f
+C4 a_98_n50# clk 5.16e-20
+C5 gnd a_133_n10# 0.304049f
+C6 a_133_n50# gnd 1.36e-19
+C7 a_62_n64# gnd 0.260028f
+C8 vdd clk 0.069031f
+C9 out gnd 0.123737f
+C10 a_62_n64# a_98_n50# 1.7e-19
+C11 vdd in 0.020473f
+C12 in clk 0.125563f
+C13 vdd a_98_n10# 0.272577f
+C14 clk a_98_n10# 0.33274f
+C15 vdd a_133_n10# 0.248779f
+C16 gnd a_98_n50# 1.36e-19
+C17 a_62_n30# vdd 6.79e-20
+C18 clk a_133_n10# 0.163856f
+C19 a_62_n64# vdd 0.020872f
+C20 a_133_n50# clk 1.7e-19
+C21 a_98_n10# a_133_n10# 0.044023f
+C22 a_62_n64# clk 0.341152f
+C23 out vdd 0.22794f
+C24 a_62_n64# in 0.057163f
+C25 a_62_n64# a_98_n10# 0.163856f
+C26 gnd 0 0.542627f
+C27 out 0 0.094438f
+C28 a_62_n64# 0 0.323967f
+C29 a_133_n10# 0 0.299294f
+C30 a_98_n10# 0 0.33934f
+C31 clk 0 1.56137f
+C32 in 0 0.222447f
+C33 vdd 0 5.96533f
+
+Vdd vdd 0 1.8
+V_clk clk 0 PULSE(0 1.8 10n 0 0 10n 20n)
+V_in in 0 PULSE(0 1.8 20n 0 0 20n 40n)
+
+.tran 0.1n 100n
+.control
+run
+
+set curplottitle = "Gautam_Gandhi_2023102059"
+plot clk 3+in 6+out
+meas tran tpdr TRIG V(clk) VAL=0.9 RISE=2 TARG V(out) VAL=0.9 RISE=1 $ FROM=25n TO=35n
+meas tran tpdf TRIG V(clk) VAL=0.9 RISE=1 TARG V(out) VAL=0.9 FALL=1 $ FROM=45n TO=55n
+let t_delay = 0.5*(tpdr + tpdf)
+print t_delay
+
+.endc
+.end

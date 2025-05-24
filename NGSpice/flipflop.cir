@@ -1,0 +1,65 @@
+* Subcircuits for NMOS, PMOS, CMOS Inverter, and Flip-Flop
+.include TSMC_180nm.txt
+
+.param LAMBDA = 0.09u
+.param Wp={20*LAMBDA}
+.param Wn={10*LAMBDA}
+.param LENGTH={2*LAMBDA}
+
+* Subcircuit for NMOS transistor
+.subckt NMOS d g s b Width=Wn
+MN d g s b CMOSN W={Width} L={LENGTH}
++ AS={5*Width*LAMBDA} PS={10*LAMBDA+2*Width} AD={2*Width*LAMBDA} PD={10*LAMBDA+2*Width}
+.ends NMOS
+
+* Subcircuit for PMOS transistor
+.subckt PMOS d g s b Width=Wp
+MP d g s b CMOSP W={Width} L={LENGTH}
++ AS={5*Width*LAMBDA} PS={10*LAMBDA+2*Width} AD={2*Width*LAMBDA} PD={10*LAMBDA+2*Width}
+.ends PMOS
+
+* Subcircuit for CMOS Inverter
+.subckt INVERTER in out vdd gnd WidthN=Wn WidthP=Wp
+XMP out in vdd vdd PMOS Width={WidthP}
+XMN out in gnd gnd NMOS Width={WidthN}
+.ends INVERTER
+
+* Positive Edge Triggered D flip-flop using TPSC technology
+.subckt FlipFlop in clk out vdd gnd WidthN=Wn WidthP=Wp
+XP1 x1 in vdd vdd PMOS Width={2*WidthP}
+XP2 x1 clk m1 vdd PMOS Width={2*WidthP}
+XN1 m1 in gnd gnd NMOS Width={WidthN}
+
+XP3 m2 clk vdd vdd PMOS Width={WidthP}
+XN2 m2 m1  x2  gnd NMOS Width={2*WidthN}
+XN3 x2 clk gnd gnd NMOS Width={2*WidthN}
+
+XP4 m3 m2 vdd vdd PMOS Width={WidthP}
+XN4 m3 clk x3 gnd NMOS Width={2*WidthN}
+XN5 x3 m2 gnd gnd NMOS Width={2*WidthN}
+
+X_inv1 m3 out vdd gnd INVERTER WidthN={WidthN} WidthP={WidthP}
+.ends FlipFlop
+
+V_vdd vdd 0 1.8
+V_clk clk 0 PULSE(0 1.8 10n 0 0 10n 20n)
+* V_in  in  0 PULSE(0 1.8 20n 0 0 20n 40n)
+V_in  in  0 PULSE(0 1.8 10.012n 0 0 20n 40n)
+
+X_FF1 in clk out vdd gnd FlipFlop WidthN={Wn} WidthP={Wp}
+X_load out out_inv vdd gnd INVERTER WidthN={Wn} WidthP={Wp}
+
+.tran 0.001n 100n
+.control
+run
+
+meas tran tpdr TRIG V(clk) VAL=0.9 RISE=3 TARG V(out) VAL=0.9 RISE=1 $ FROM=25n TO=35n
+meas tran tpdf TRIG V(clk) VAL=0.9 RISE=2 TARG V(out) VAL=0.9 FALL=1 $ FROM=45n TO=55n
+let t_delay = 0.5*(tpdr + tpdf)
+print tpdr tpdf t_delay
+set curplottitle = "Gautam_Gandhi_2023102059"
+* set color0 = white
+plot clk 3+in 6+out
+
+.endc
+.end

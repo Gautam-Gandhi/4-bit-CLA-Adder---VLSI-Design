@@ -1,0 +1,213 @@
+* 4-bit CLA Adder with flip-flops
+.include TSMC_180nm.txt
+
+.param LAMBDA = 0.09u
+.param Wp={20*LAMBDA}
+.param Wn={10*LAMBDA}
+.param LENGTH={2*LAMBDA}
+
+* Subcircuit for NMOS transistor
+.subckt NMOS d g s b Width=Wn
+MN d g s b CMOSN W={Width} L={LENGTH}
++ AS={5*Width*LAMBDA} PS={10*LAMBDA+2*Width} AD={2*Width*LAMBDA} PD={10*LAMBDA+2*Width}
+.ends NMOS
+
+* Subcircuit for PMOS transistor
+.subckt PMOS d g s b Width=Wp
+MP d g s b CMOSP W={Width} L={LENGTH}
++ AS={5*Width*LAMBDA} PS={10*LAMBDA+2*Width} AD={2*Width*LAMBDA} PD={10*LAMBDA+2*Width}
+.ends PMOS
+
+* Subcircuit for CMOS Inverter
+.subckt INVERTER in out vdd gnd WidthN=Wn WidthP=Wp
+XMP out in vdd vdd PMOS Width={WidthP}
+XMN out in gnd gnd NMOS Width={WidthN}
+.ends INVERTER
+
+* Positive Edge Triggered D flip-flop using TPSC technology
+.subckt FlipFlop in clk out vdd gnd WidthN=Wn WidthP=Wp
+XP1 x1 in vdd vdd PMOS Width={2*WidthP}
+XP2 x1 clk m1 vdd PMOS Width={2*WidthP}
+XN1 m1 in gnd gnd NMOS Width={WidthN}
+
+XP3 m2 clk vdd vdd PMOS Width={WidthP}
+XN2 m2 m1  x2  gnd NMOS Width={2*WidthN}
+XN3 x2 clk gnd gnd NMOS Width={2*WidthN}
+
+XP4 m3 m2 vdd vdd PMOS Width={WidthP}
+XN4 m3 clk x3 gnd NMOS Width={2*WidthN}
+XN5 x3 m2 gnd gnd NMOS Width={2*WidthN}
+
+X_inv1 m3 out vdd gnd INVERTER WidthN={WidthN} WidthP={WidthP}
+.ends FlipFlop
+
+* Subcircuit for a 2-input NAND gate
+.subckt NAND_2input in1 in2 out vdd gnd WidthN=Wn WidthP=Wp
+XP1 out in1 vdd vdd PMOS Width={WidthP}  
+XP2 out in2 vdd vdd PMOS Width={WidthP}  
+XN1 out in1  x  gnd NMOS Width={2*WidthN}
+XN2  x  in2 gnd gnd NMOS Width={2*WidthN}
+.ends NAND_2input
+
+* Subcircuit for a 3-input NAND gate
+.subckt NAND_3input in1 in2 in3 out vdd gnd WidthN=Wn WidthP=Wp
+XP1 out in1 vdd vdd PMOS Width={WidthP}
+XP2 out in2 vdd vdd PMOS Width={WidthP}
+XP3 out in3 vdd vdd PMOS Width={WidthP}
+XN1 out in1  x  gnd NMOS Width={3*WidthN}
+XN2  x  in2  y  gnd NMOS Width={3*WidthN}
+XN3  y  in3 gnd gnd NMOS Width={3*WidthN}
+.ends NAND_3input
+
+* Subcircuit for a 4-input NAND gate
+.subckt NAND_4input in1 in2 in3 in4 out vdd gnd WidthN=Wn WidthP=Wp
+XP1 out in1 vdd vdd PMOS Width={WidthP}  
+XP2 out in2 vdd vdd PMOS Width={WidthP}  
+XP3 out in3 vdd vdd PMOS Width={WidthP}  
+XP4 out in4 vdd vdd PMOS Width={WidthP}  
+XN1 out in1  x  gnd NMOS Width={4*WidthN}
+XN2  x  in2  y  gnd NMOS Width={4*WidthN}
+XN3  y  in3  z  gnd NMOS Width={4*WidthN}
+XN4  z  in4 gnd gnd NMOS Width={4*WidthN}
+.ends NAND_4input
+
+* Subcircuit for a 5-input NAND gate
+.subckt NAND_5input in1 in2 in3 in4 in5 out vdd gnd WidthN=Wn WidthP=Wp
+XP1 out in1 vdd vdd PMOS Width={WidthP}  
+XP2 out in2 vdd vdd PMOS Width={WidthP}  
+XP3 out in3 vdd vdd PMOS Width={WidthP}  
+XP4 out in4 vdd vdd PMOS Width={WidthP}  
+XP5 out in5 vdd vdd PMOS Width={WidthP}  
+XN1 out in1  x  gnd NMOS Width={5*WidthN}
+XN2  x  in2  y  gnd NMOS Width={5*WidthN}
+XN3  y  in3  z  gnd NMOS Width={5*WidthN}
+XN4  z  in4  w  gnd NMOS Width={5*WidthN}
+XN5  w  in5 gnd gnd NMOS Width={5*WidthN}
+.ends NAND_5input
+
+* Subcircuit for a 2-input XOR gate using 3T
+.subckt XOR_3T in1 in2 out vdd gnd WidthN=Wn WidthP=Wp
+XP1 out1 in1 in2 vdd PMOS Width={2*WidthP}
+XP2 out1 in2 in1 vdd PMOS Width={2*WidthP}
+XN1 out1 in1 gnd gnd NMOS Width={WidthN}
+
+X_inv1 out1 out_inv vdd gnd INVERTER WidthN={WidthN} WidthP={WidthP}
+X_inv2 out_inv out vdd gnd INVERTER WidthN={WidthN} WidthP={WidthP}
+* ebuffer out 0 out2 0 1
+.ends XOR_3T
+
+* Subcircuit for generating p(propagate) and g(generate) signals
+.subckt pg_block_1bit a b p g_inv vdd gnd $ generates p and g_inv
+X_XOR a b p vdd gnd XOR_3T WidthN={Wn} WidthP={Wp}
+X_NAND a b g_inv vdd gnd NAND_2input WidthN={Wn} WidthP={Wp}
+.ends pg_block_1bit
+
+* Subcircuit for Generating Carry Bits 
+.subckt CLA_4bit p0 p1 p2 p3 g0 g1 g2 g3 g0_inv g1_inv g2_inv g3_inv c0 c1 c2 c3 c4_ff_out vdd gnd
+* generating c1
+X_NAND1 p0   c0   x1 vdd gnd NAND_2input WidthN={Wn} WidthP={Wp}
+X_NAND2 x1 g0_inv c1 vdd gnd NAND_2input WidthN={Wn} WidthP={Wp}
+
+* generating c2
+X_NAND3 p1 g0 x2 vdd gnd NAND_2input WidthN={Wn} WidthP={Wp}
+X_NAND4 p1 p0 c0 x3 vdd gnd NAND_3input WidthN={Wn} WidthP={Wp}
+X_NAND5 x2 g1_inv x3 c2 vdd gnd NAND_3input WidthN={Wn} WidthP={Wp}
+
+* generating c3
+X_NAND6 p2 g1 x4 vdd gnd NAND_2input WidthN={Wn} WidthP={Wp}
+X_NAND7 p2 p1 g0 x5 vdd gnd NAND_3input WidthN={Wn} WidthP={Wp}
+X_NAND8 p2 p1 p0 c0 x6 vdd gnd NAND_4input WidthN={Wn} WidthP={Wp}
+X_NAND9 x4 g2_inv x5 x6 c3 vdd gnd NAND_4input WidthN={Wn} WidthP={Wp}
+
+* generating c4_ff_out
+X_NAND10 p3 g2 x7 vdd gnd NAND_2input WidthN={Wn} WidthP={Wp}
+X_NAND11 p3 p2 g1 x8 vdd gnd NAND_3input WidthN={Wn} WidthP={Wp}
+X_NAND12 p3 p2 p1 g0 x9 vdd gnd NAND_4input WidthN={Wn} WidthP={Wp}
+X_NAND13 p3 p2 p1 p0 c0 x10 vdd gnd NAND_5input WidthN={Wn} WidthP={Wp}
+X_NAND14 g3_inv x7 x8 x9 x10 c4_ff_out vdd gnd NAND_5input WidthN={Wn} WidthP={Wp}
+.ends CLA_4bit
+
+* Subcircuit for the Sum Block
+.subckt sum_block_1bit p c s vdd gnd
+X_XOR p c s vdd gnd XOR_3T WidthN={Wn} WidthP={Wp}
+.ends sum_block_1bit
+
+* FlipFlop in clk out vdd gnd WidthN=Wn WidthP=Wp
+X_FF1 a0_ff_in clk a0 vdd gnd FlipFlop WidthN={Wn} WidthP={Wp}
+X_FF2 a1_ff_in clk a1 vdd gnd FlipFlop WidthN={Wn} WidthP={Wp}
+X_FF3 a2_ff_in clk a2 vdd gnd FlipFlop WidthN={Wn} WidthP={Wp}
+X_FF4 a3_ff_in clk a3 vdd gnd FlipFlop WidthN={Wn} WidthP={Wp}
+X_FF5 b0_ff_in clk b0 vdd gnd FlipFlop WidthN={Wn} WidthP={Wp}
+X_FF6 b1_ff_in clk b1 vdd gnd FlipFlop WidthN={Wn} WidthP={Wp}
+X_FF7 b2_ff_in clk b2 vdd gnd FlipFlop WidthN={Wn} WidthP={Wp}
+X_FF8 b3_ff_in clk b3 vdd gnd FlipFlop WidthN={Wn} WidthP={Wp}
+X_FF9 c0_ff_in clk c0 vdd gnd FlipFlop WidthN={Wn} WidthP={Wp}
+
+X_pg0 a0 b0 p0 g0_inv vdd gnd pg_block_1bit
+X_pg1 a1 b1 p1 g1_inv vdd gnd pg_block_1bit
+X_pg2 a2 b2 p2 g2_inv vdd gnd pg_block_1bit
+X_pg3 a3 b3 p3 g3_inv vdd gnd pg_block_1bit
+
+X_inv1 g0_inv g0 vdd gnd INVERTER WidthN={Wn} WidthP={Wp}
+X_inv2 g1_inv g1 vdd gnd INVERTER WidthN={Wn} WidthP={Wp}
+X_inv3 g2_inv g2 vdd gnd INVERTER WidthN={Wn} WidthP={Wp}
+X_inv4 g3_inv g3 vdd gnd INVERTER WidthN={Wn} WidthP={Wp}
+
+X_CLA p0 p1 p2 p3 g0 g1 g2 g3 g0_inv g1_inv g2_inv g3_inv c0 c1 c2 c3 c4 vdd gnd CLA_4bit
+
+X_s0 p0 c0 s0 vdd gnd sum_block_1bit
+X_s1 p1 c1 s1 vdd gnd sum_block_1bit
+X_s2 p2 c2 s2 vdd gnd sum_block_1bit
+X_s3 p3 c3 s3 vdd gnd sum_block_1bit
+
+X_FF_out0 s0 clk s0_ff_out vdd gnd FlipFlop WidthN={Wn} WidthP={Wp}
+X_FF_out1 s1 clk s1_ff_out vdd gnd FlipFlop WidthN={Wn} WidthP={Wp}
+X_FF_out2 s2 clk s2_ff_out vdd gnd FlipFlop WidthN={Wn} WidthP={Wp}
+X_FF_out3 s3 clk s3_ff_out vdd gnd FlipFlop WidthN={Wn} WidthP={Wp}
+X_FF_out4 c4 clk c4_ff_out vdd gnd FlipFlop WidthN={Wn} WidthP={Wp}
+
+X_load1 s0_ff_out so_inv_ff_out vdd gnd INVERTER WidthN={Wn} WidthP={Wp}
+X_load2 s1_ff_out s1_inv_ff_out vdd gnd INVERTER WidthN={Wn} WidthP={Wp}
+X_load3 s2_ff_out s2_inv_ff_out vdd gnd INVERTER WidthN={Wn} WidthP={Wp}
+X_load4 s3_ff_out s3_inv_ff_out vdd gnd INVERTER WidthN={Wn} WidthP={Wp}
+X_load5 c4_ff_out c4_inv_ff_out vdd gnd INVERTER WidthN={Wn} WidthP={Wp}
+
+Vdd vdd gnd DC 1.8
+
+* V_clk clk 0 PULSE(0 1.8 10n 0 0 10n 20n)
+V_clk clk 0 PULSE(0 1.8 0.5n 0 0 0.5n 1n)
+V_c0 c0_ff_in 0 0
+V_a0 a0_ff_in 0 1.8
+V_a1 a1_ff_in 0 1.8
+V_a2 a2_ff_in 0 1.8
+V_a3 a3_ff_in 0 1.8
+V_b0 b0_ff_in 0 PULSE(0 1.8 15n 0 0 20n 40n)
+V_b1 b1_ff_in 0 0
+V_b2 b2_ff_in 0 0
+V_b3 b3_ff_in 0 0
+
+* V_clk clk 0 0
+* V_c0 c0 0 0
+* V_a0 a0 0 1.8
+* V_a1 a1 0 1.8
+* V_a2 a2 0 1.8
+* V_a3 a3 0 1.8
+* V_b0 b0 0 PULSE(0 1.8 10n 0 0 10n 20n)
+* V_b1 b1 0 0
+* V_b2 b2 0 0
+* V_b3 b3 0 0
+
+.tran 0.01n 100n
+.control
+run
+
+meas tran tpdr TRIG V(b0) VAL=0.9 RISE=1 TARG V(c4) VAL=0.9 RISE=1 $ FROM=25n TO=35n
+meas tran tpdf TRIG V(b0) VAL=0.9 FALL=1 TARG V(c4) VAL=0.9 FALL=1 $ FROM=45n TO=55n
+let t_delay = 0.5*(tpdr + tpdf)
+print tpdr tpdf t_delay
+set curplottitle = "Gautam_Gandhi_2023102059"
+* plot b0 3+s0 6+s1 9+s2 12+s3 15+c4
+plot clk 3+b0_ff_in 6+s0_ff_out 9+s1_ff_out 12+s2_ff_out 15+s3_ff_out 18+c4_ff_out
+
+.endc
+.end

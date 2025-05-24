@@ -1,0 +1,349 @@
+$date
+	Wed Nov 20 15:02:53 2024
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module tb_complete_circuit $end
+$var wire 4 ! sum [3:0] $end
+$var wire 1 " cout $end
+$var reg 4 # a [3:0] $end
+$var reg 4 $ b [3:0] $end
+$var reg 1 % cin $end
+$var reg 1 & clk $end
+$scope module uut $end
+$var wire 4 ' a [3:0] $end
+$var wire 4 ( b [3:0] $end
+$var wire 1 % cin $end
+$var wire 1 & clk $end
+$var wire 4 ) sum [3:0] $end
+$var wire 1 " cout $end
+$var wire 4 * cla_sum [3:0] $end
+$var wire 1 + cla_cout $end
+$var wire 1 , cin_ff $end
+$var wire 4 - b_ff [3:0] $end
+$var wire 4 . a_ff [3:0] $end
+$scope module cla $end
+$var wire 4 / a [3:0] $end
+$var wire 4 0 b [3:0] $end
+$var wire 1 + cout $end
+$var wire 4 1 sum [3:0] $end
+$var wire 4 2 p [3:0] $end
+$var wire 4 3 g_inv [3:0] $end
+$var wire 4 4 g [3:0] $end
+$var wire 1 , cin $end
+$var wire 4 5 c [3:0] $end
+$upscope $end
+$scope module dff_a0 $end
+$var wire 1 & clk $end
+$var wire 1 6 in $end
+$var reg 1 7 out $end
+$upscope $end
+$scope module dff_a1 $end
+$var wire 1 & clk $end
+$var wire 1 8 in $end
+$var reg 1 9 out $end
+$upscope $end
+$scope module dff_a2 $end
+$var wire 1 & clk $end
+$var wire 1 : in $end
+$var reg 1 ; out $end
+$upscope $end
+$scope module dff_a3 $end
+$var wire 1 & clk $end
+$var wire 1 < in $end
+$var reg 1 = out $end
+$upscope $end
+$scope module dff_b0 $end
+$var wire 1 & clk $end
+$var wire 1 > in $end
+$var reg 1 ? out $end
+$upscope $end
+$scope module dff_b1 $end
+$var wire 1 & clk $end
+$var wire 1 @ in $end
+$var reg 1 A out $end
+$upscope $end
+$scope module dff_b2 $end
+$var wire 1 & clk $end
+$var wire 1 B in $end
+$var reg 1 C out $end
+$upscope $end
+$scope module dff_b3 $end
+$var wire 1 & clk $end
+$var wire 1 D in $end
+$var reg 1 E out $end
+$upscope $end
+$scope module dff_cin $end
+$var wire 1 & clk $end
+$var wire 1 % in $end
+$var reg 1 , out $end
+$upscope $end
+$scope module dff_cout $end
+$var wire 1 & clk $end
+$var wire 1 + in $end
+$var reg 1 " out $end
+$upscope $end
+$scope module dff_sum0 $end
+$var wire 1 & clk $end
+$var wire 1 F in $end
+$var reg 1 G out $end
+$upscope $end
+$scope module dff_sum1 $end
+$var wire 1 & clk $end
+$var wire 1 H in $end
+$var reg 1 I out $end
+$upscope $end
+$scope module dff_sum2 $end
+$var wire 1 & clk $end
+$var wire 1 J in $end
+$var reg 1 K out $end
+$upscope $end
+$scope module dff_sum3 $end
+$var wire 1 & clk $end
+$var wire 1 L in $end
+$var reg 1 M out $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+xM
+xL
+xK
+xJ
+xI
+xH
+xG
+xF
+xE
+0D
+xC
+0B
+xA
+0@
+x?
+0>
+x=
+0<
+x;
+0:
+x9
+08
+x7
+06
+bx 5
+bx 4
+bx 3
+bx 2
+bx 1
+bx 0
+bx /
+bx .
+bx -
+x,
+x+
+bx *
+bx )
+b0 (
+b0 '
+0&
+0%
+b0 $
+b0 #
+x"
+bx !
+$end
+#5
+0L
+0J
+0H
+0+
+0F
+b0 4
+b0 *
+b0 1
+b1111 3
+b0 2
+07
+09
+0;
+b0 .
+b0 /
+0=
+0?
+0A
+0C
+b0 -
+b0 0
+0E
+b0 5
+0,
+1&
+#10
+1>
+16
+0&
+b1 $
+b1 (
+b1 #
+b1 '
+#15
+1H
+b10 *
+b10 1
+b10 5
+b1 4
+b1110 3
+0"
+0M
+0K
+0I
+b0 !
+b0 )
+0G
+b1 -
+b1 0
+1?
+b1 .
+b1 /
+17
+1&
+#20
+1@
+06
+18
+0&
+b11 $
+b11 (
+b10 #
+b10 '
+#25
+1J
+0H
+b100 5
+1F
+b10 4
+b101 *
+b101 1
+b1101 3
+b1 2
+07
+b10 .
+b10 /
+19
+b11 -
+b11 0
+1A
+b10 !
+b10 )
+1I
+1&
+#30
+0@
+1B
+08
+1:
+0&
+1%
+b101 $
+b101 (
+b100 #
+b100 '
+#35
+1L
+0J
+1H
+b100 4
+0F
+b1011 3
+b1010 *
+b1010 1
+1K
+0I
+b101 !
+b101 )
+1G
+b1011 5
+1,
+1C
+b101 -
+b101 0
+0A
+1;
+b100 .
+b100 /
+09
+1&
+#40
+1@
+16
+18
+0&
+0%
+b111 $
+b111 (
+b111 #
+b111 '
+#45
+1J
+1H
+b111 4
+b1000 3
+0F
+b0 2
+b1110 *
+b1110 1
+17
+b111 .
+b111 /
+19
+b111 -
+b111 0
+1A
+b1110 5
+0,
+0G
+1I
+0K
+b1010 !
+b1010 )
+1M
+1&
+#50
+1D
+1<
+0&
+1%
+b1111 $
+b1111 (
+b1111 #
+b1111 '
+#55
+1+
+b1111 4
+1F
+b0 3
+b1111 *
+b1111 1
+b1110 !
+b1110 )
+1K
+b1111 5
+1,
+b1111 -
+b1111 0
+1E
+b1111 .
+b1111 /
+1=
+1&
+#60
+0&

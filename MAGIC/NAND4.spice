@@ -1,0 +1,180 @@
+* SPICE3 file created from NAND4.ext - technology: scmos
+
+.option scale=90n
+
+M1000 out_xor a_21_n168# vdd vdd pfet w=20 l=2
++  ad=100p pd=50u as=100p ps=50u
+M1001 a_n26_n137# in1_xor gnd Gnd nfet w=10 l=2
++  ad=50p pd=30u as=50p ps=30u
+M1002 a_62_n30# in_ff w_49_n36# w_49_n36# pfet w=40 l=2
++  ad=0.2n pd=50u as=0.2n ps=90u
+M1003 in1_xor in2_xor a_n26_n137# vdd pfet w=40 l=2
++  ad=0.2n pd=90u as=0.2n ps=90u
+M1004 a_231_n219# in1_NAND4 gnd Gnd nfet w=40 l=2
++  ad=0.2n pd=50u as=0.2n ps=90u
+M1005 out_NAND4 in1_NAND4 vdd vdd pfet w=20 l=2
++  ad=100p pd=30u as=100p ps=50u
+M1006 a_62_n64# clk a_62_n30# w_49_n36# pfet w=40 l=2
++  ad=0.2n pd=90u as=0.2n ps=50u
+M1007 a_98_n10# clk w_49_n36# w_49_n36# pfet w=20 l=2
++  ad=100p pd=50u as=100p ps=50u
+M1008 out_inv in_inv gnd Gnd nfet w=10 l=2
++  ad=50p pd=30u as=50p ps=30u
+M1009 a_157_n202# in1_NAND3 gnd Gnd nfet w=30 l=2
++  ad=0.15n pd=40u as=0.15n ps=70u
+M1010 out_xor a_21_n168# gnd Gnd nfet w=10 l=2
++  ad=50p pd=30u as=50p ps=30u
+M1011 out_NAND3 in1_NAND3 vdd vdd pfet w=20 l=2
++  ad=100p pd=30u as=100p ps=50u
+M1012 a_86_n185# in1_NAND2 gnd Gnd nfet w=20 l=2
++  ad=100p pd=30u as=100p ps=50u
+M1013 a_243_n219# in2_NAND4 a_231_n219# Gnd nfet w=40 l=2
++  ad=0.2n pd=50u as=0.2n ps=50u
+M1014 out_inv in_inv vdd vdd pfet w=20 l=2
++  ad=100p pd=50u as=100p ps=50u
+M1015 out_ff a_133_n10# a_51_n72# Gnd nfet w=10 l=2
++  ad=50p pd=30u as=50p ps=30u
+M1016 a_21_n168# a_n26_n137# vdd vdd pfet w=20 l=2
++  ad=100p pd=50u as=100p ps=50u
+M1017 vdd in2_NAND4 out_NAND4 vdd pfet w=20 l=2
++  ad=100p pd=30u as=100p ps=30u
+M1018 a_169_n202# in2_NAND3 a_157_n202# Gnd nfet w=30 l=2
++  ad=0.15n pd=40u as=0.15n ps=40u
+M1019 in2_xor in1_xor a_n26_n137# vdd pfet w=40 l=2
++  ad=0.2n pd=90u as=0.2n ps=90u
+M1020 a_133_n50# a_98_n10# a_51_n72# Gnd nfet w=20 l=2
++  ad=100p pd=30u as=100p ps=50u
+M1021 vdd in2_NAND3 out_NAND3 vdd pfet w=20 l=2
++  ad=100p pd=30u as=100p ps=30u
+M1022 a_98_n50# clk a_51_n72# Gnd nfet w=20 l=2
++  ad=100p pd=30u as=100p ps=50u
+M1023 a_98_n10# a_62_n64# a_98_n50# Gnd nfet w=20 l=2
++  ad=100p pd=50u as=100p ps=30u
+M1024 out_NAND2 in2_NAND2 a_86_n185# Gnd nfet w=20 l=2
++  ad=100p pd=50u as=100p ps=30u
+M1025 a_255_n219# in3_NAND4 a_243_n219# Gnd nfet w=40 l=2
++  ad=0.2n pd=50u as=0.2n ps=50u
+M1026 a_62_n64# in_ff a_51_n72# Gnd nfet w=10 l=2
++  ad=50p pd=30u as=50p ps=30u
+M1027 out_NAND2 in1_NAND2 vdd vdd pfet w=20 l=2
++  ad=100p pd=30u as=100p ps=50u
+M1028 a_133_n10# a_98_n10# w_49_n36# w_49_n36# pfet w=20 l=2
++  ad=100p pd=50u as=100p ps=50u
+M1029 out_NAND4 in3_NAND4 vdd vdd pfet w=20 l=2
++  ad=100p pd=30u as=100p ps=30u
+M1030 out_NAND3 in3_NAND3 a_169_n202# Gnd nfet w=30 l=2
++  ad=0.15n pd=70u as=0.15n ps=40u
+M1031 a_133_n10# clk a_133_n50# Gnd nfet w=20 l=2
++  ad=100p pd=50u as=100p ps=30u
+M1032 out_ff a_133_n10# w_49_n36# w_49_n36# pfet w=20 l=2
++  ad=100p pd=50u as=100p ps=50u
+M1033 out_NAND3 in3_NAND3 vdd vdd pfet w=20 l=2
++  ad=100p pd=50u as=100p ps=30u
+M1034 out_NAND4 in4_NAND4 a_255_n219# Gnd nfet w=40 l=2
++  ad=0.2n pd=90u as=0.2n ps=50u
+M1035 vdd in2_NAND2 out_NAND2 vdd pfet w=20 l=2
++  ad=100p pd=50u as=100p ps=30u
+M1036 vdd in4_NAND4 out_NAND4 vdd pfet w=20 l=2
++  ad=100p pd=50u as=100p ps=30u
+M1037 a_21_n168# a_n26_n137# gnd Gnd nfet w=10 l=2
++  ad=50p pd=30u as=50p ps=30u
+C0 gnd out_NAND3 2.27e-20
+C1 in1_NAND4 in2_NAND4 0.173673f
+C2 clk a_98_n50# 5.16e-20
+C3 vdd in2_NAND2 0.020473f
+C4 in3_NAND4 in1_NAND4 0.007278f
+C5 in4_NAND4 a_231_n219# 2.83e-19
+C6 gnd a_n26_n137# 0.180335f
+C7 a_86_n185# in2_NAND2 1.7e-19
+C8 vdd in3_NAND3 0.020472f
+C9 clk a_133_n10# 0.163856f
+C10 out_NAND2 in1_NAND2 0.036296f
+C11 out_NAND4 in1_NAND4 0.001572f
+C12 clk a_133_n50# 1.7e-19
+C13 in3_NAND4 in2_NAND4 0.338625f
+C14 in4_NAND4 in1_NAND4 0.007681f
+C15 out_NAND3 in1_NAND3 0.036296f
+C16 in4_NAND4 a_243_n219# 2.83e-19
+C17 a_n26_n137# a_21_n168# 0.059344f
+C18 gnd a_21_n168# 0.262811f
+C19 vdd in1_NAND4 0.020614f
+C20 out_NAND2 in2_NAND2 0.163729f
+C21 gnd in1_NAND3 0.001614f
+C22 a_157_n202# in3_NAND3 2.83e-19
+C23 out_NAND4 in2_NAND4 0.00699f
+C24 in_ff w_49_n36# 0.020473f
+C25 out_NAND4 in3_NAND4 0.010538f
+C26 vdd in1_xor 0.024924f
+C27 out_NAND3 in2_NAND3 0.106322f
+C28 in4_NAND4 in2_NAND4 0.007681f
+C29 in4_NAND4 a_255_n219# 1.7e-19
+C30 in3_NAND4 in4_NAND4 0.50398f
+C31 gnd in1_NAND2 0.001614f
+C32 vdd in2_NAND4 0.020472f
+C33 a_62_n64# a_51_n72# 0.260028f
+C34 vdd in3_NAND4 0.020472f
+C35 in2_xor a_n26_n137# 0.90085f
+C36 a_169_n202# in3_NAND3 1.7e-19
+C37 gnd in2_NAND3 8.87e-19
+C38 in_ff clk 0.125563f
+C39 clk w_49_n36# 0.069031f
+C40 out_NAND4 in4_NAND4 0.071017f
+C41 a_62_n64# a_98_n10# 0.163856f
+C42 out_NAND3 in3_NAND3 0.069367f
+C43 out_ff a_51_n72# 0.123737f
+C44 out_NAND4 vdd 1.02077f
+C45 gnd in2_NAND2 0.0559f
+C46 a_62_n64# a_98_n50# 1.7e-19
+C47 vdd in4_NAND4 0.020473f
+C48 gnd in3_NAND3 0.0559f
+C49 gnd a_231_n219# 1.36e-19
+C50 in1_NAND3 in2_NAND3 0.173673f
+C51 in_inv vdd 0.020614f
+C52 vdd out_xor 0.214182f
+C53 out_ff a_133_n10# 0.059344f
+C54 a_51_n72# a_98_n10# 0.042875f
+C55 gnd in1_NAND4 0.001614f
+C56 gnd a_243_n219# 1.36e-19
+C57 in1_NAND3 in3_NAND3 0.007681f
+C58 a_51_n72# a_98_n50# 1.36e-19
+C59 in1_xor a_n26_n137# 1.51355f
+C60 in1_NAND2 in2_NAND2 0.174076f
+C61 gnd in1_xor 0.056598f
+C62 out_inv vdd 0.22794f
+C63 a_62_n30# w_49_n36# 6.79e-20
+C64 vdd out_NAND2 0.448048f
+C65 a_51_n72# a_133_n10# 0.304049f
+C66 gnd in2_NAND4 8.87e-19
+C67 gnd a_255_n219# 1.36e-19
+C68 gnd in3_NAND4 8.87e-19
+C69 in_inv out_inv 0.059344f
+C70 in2_NAND3 in3_NAND3 0.339028f
+C71 a_51_n72# a_133_n50# 1.36e-19
+C72 a_98_n10# a_133_n10# 0.044023f
+C73 a_62_n64# in_ff 0.057163f
+C74 a_62_n64# w_49_n36# 0.020872f
+C75 out_NAND4 gnd 2.27e-20
+C76 vdd out_NAND3 0.662121f
+C77 gnd in4_NAND4 0.0559f
+C78 w_49_n36# out_ff 0.22794f
+C79 vdd a_n26_n137# 0.317981f
+C80 a_62_n64# clk 0.341152f
+C81 a_86_n185# gnd 1.36e-19
+C82 in1_xor in2_xor 0.424419f
+C83 in_inv gnd 0.056598f
+C84 gnd out_xor 0.103118f
+C85 in_ff a_51_n72# 0.056598f
+C86 vdd a_21_n168# 0.467651f
+C87 a_157_n202# gnd 1.36e-19
+C88 vdd in1_NAND3 0.020614f
+C89 w_49_n36# a_98_n10# 0.272577f
+C90 out_inv gnd 0.123737f
+C91 out_xor a_21_n168# 0.059344f
+C92 gnd out_NAND2 2.27e-20
+C93 clk a_51_n72# 0.059299f
+C94 vdd in1_NAND2 0.020614f
+C95 vdd in2_xor 0.02552f
+C96 a_169_n202# gnd 1.36e-19
+C97 vdd in2_NAND3 0.020472f
+C98 clk a_98_n10# 0.33274f
+C99 w_49_n36# a_133_n10# 0.248779f

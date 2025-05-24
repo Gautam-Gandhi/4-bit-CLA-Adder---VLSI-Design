@@ -1,0 +1,37 @@
+* Subcircuits for NMOS, PMOS, CMOS Inverter, and Flip-Flop
+.include TSMC_180nm.txt
+
+.param LAMBDA = 0.09u
+.param Wp={20*LAMBDA}
+.param Wn={10*LAMBDA}
+.param LENGTH={2*LAMBDA}
+
+* Subcircuit for NMOS transistor
+.subckt NMOS d g s b Width=Wn
+MN d g s b CMOSN W={Width} L={LENGTH}
++ AS={5*Width*LAMBDA} PS={10*LAMBDA+2*Width} AD={2*Width*LAMBDA} PD={10*LAMBDA+2*Width}
+.ends NMOS
+
+* Subcircuit for PMOS transistor
+.subckt PMOS d g s b Width=Wp
+MP d g s b CMOSP W={Width} L={LENGTH}
++ AS={5*Width*LAMBDA} PS={10*LAMBDA+2*Width} AD={2*Width*LAMBDA} PD={10*LAMBDA+2*Width}
+.ends PMOS
+
+* Subcircuit for CMOS Inverter
+.subckt INVERTER in out vdd gnd WidthN=Wn WidthP=Wp
+XMP out in vdd vdd PMOS Width={WidthP}
+XMN out in gnd gnd NMOS Width={WidthN}
+.ends INVERTER
+
+* Subcircuit for a 2-input XOR gate using 3T
+.subckt XOR_3T in1 in2 out vdd gnd WidthN=Wn WidthP=Wp
+XP1 out1 in1 in2 vdd PMOS Width={4*WidthN}
+XP2 out1 in2 in1 vdd PMOS Width={4*WidthN}
+XN1 out1 in1 gnd gnd NMOS Width={WidthN}
+
+X_inv1 out1 out_inv vdd gnd INVERTER WidthN={WidthN} WidthP={WidthP}
+X_inv2 out_inv out vdd gnd INVERTER WidthN={WidthN} WidthP={WidthP}
+
+* ebuffer out 0 out2 0 1
+.ends XOR_3T
